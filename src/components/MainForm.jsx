@@ -113,10 +113,16 @@ function MainForm() {
         agreeToTerms: values.agreeToTerms, 
     };
 
-    const populateForm = (data, setFieldValue) => {
-      setFieldValue('name', data.name);
-      setFieldValue('selectors', data.selectors);
-      setFieldValue('isAgree', data.isAgree);
+    const populateForm = (data,formik) => {
+      console.log('testformiK' ,formik.values)
+      const updatedValues = {
+        ...formik.values,
+        name: data.name,
+        selectors: data.selectors,
+        isAgree: data.isAgree
+      };
+    
+      formik.setValues(updatedValues);
     };
 
     console.log("testData : ",data)
@@ -131,7 +137,7 @@ function MainForm() {
       .then(response => response.json())
       .then(result => {
 
-        populateForm(result);
+        populateForm(result ,formik);
           // Handle the response from the server
           console.log("Post request successful. Response:", result);
     })
