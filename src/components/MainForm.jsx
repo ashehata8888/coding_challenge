@@ -113,15 +113,11 @@ function MainForm() {
         agreeToTerms: values.agreeToTerms, 
     };
 
-    const populateForm = (data) => {
-        setName(data.name);
-        setSelectors(data.selectors);
-        setIsAgree(data.isAgree);
-
-        // formik.values = data
-
-        // formik.handleChange
-      };
+    const populateForm = (data, setFieldValue) => {
+      setFieldValue('name', data.name);
+      setFieldValue('selectors', data.selectors);
+      setFieldValue('isAgree', data.isAgree);
+    };
 
     console.log("testData : ",data)
   
