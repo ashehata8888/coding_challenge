@@ -152,7 +152,7 @@ function MainForm() {
       <p className="mb-4">
         Please enter your name and pick the sectors you are currently involved in.
       </p>
-      <form onSubmit={formik.handleSubmit}>
+      <form onSubmit={formik.handleSubmit}             style={{marginBottom:"30px"}}>
         <div className="mb-4">
           <label htmlFor="name" className="block text-gray-700" style={{ marginRight: '15px' }}>
             Name:
@@ -166,13 +166,14 @@ function MainForm() {
             onChange={formik.handleChange}
             // onChange={(e)=>{setName(e.target.value)}}
             onBlur={formik.handleBlur}
-            className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:border-blue-500"
+            className="w-full border border-gray-300 px-3 py-2 rounded focus:outline-none focus:border-blue-500 mb-5" 
+            style={{marginBottom:"15px"}}
           />
           {formik.touched.name && formik.errors.name && (
             <div className="text-red-500">{formik.errors.name}</div>
           )}
         </div>
-        <div className="mb-4">
+        <div className="mb-4"             style={{marginBottom:"15px"}}>
           <label htmlFor="sectors" className="block text-gray-700" style={{ marginRight: '15px' }}>
             Sectors:
           </label>
@@ -242,11 +243,14 @@ function MainForm() {
         >
             Clear Database
         </button>
+       
       </form>
-
+      
+      <div style={{display:'flex',justifyItems:"center"}}>
       <EditableTable countId={countId} 
       CountClearSector={CountClearSector}
       />
+      </div>
     
     </div>
   );
