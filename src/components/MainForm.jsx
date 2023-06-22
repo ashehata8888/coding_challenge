@@ -1,12 +1,22 @@
 
-import React ,{useState} from 'react';
 import { useFormik } from 'formik';
+
+import { useEffect, useState } from "react";
+
+import EditableTable from "./EditableTable"
+
+
+
+
+
 
 function MainForm() {
 
     const [name, setName] = useState('');
     const [selectors, setSelectors] = useState([]);
     const [isAgree, setIsAgree] = useState(false);
+    const [countId,setCountId]= useState(0)
+    const [CountClearSector,setCountClearSector] = useState(0)
 
     function fetchData() {
         fetch("https://jsonserver-7byg.onrender.com/api/getFormData")
@@ -46,34 +56,9 @@ function MainForm() {
 
 
 
-    // function postData() {
-    //     const data = {
-    //         name: values.name,
-    //         sectors: values.sectors,
-    //         agreeToTerms: values.agreeToTerms, 
-    //     };
-      
-    //     fetch("https://jsonserver-7byg.onrender.com/", {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json"
-    //       },
-    //       body: JSON.stringify(data)
-    //     })
-    //       .then(response => response.json())
-    //       .then(result => {
-    //         // Handle the response from the server
-    //         console.log("Post request successful. Response:", result);
-    //       })
-    //       .catch(error => {
-    //         // Handle any errors that occurred during the request
-    //         console.error("Error posting data:", error);
-    //       });
-    //   }
 
 
 
-    
 
 
   const formik = useFormik({
@@ -99,8 +84,14 @@ function MainForm() {
 
       return errors;
     },
+
     onSubmit: (values) => {
-    
+      setCountId(countId + 1)
+      setCountClearSector(curr => curr + 1)
+
+
+
+
       console.log('Name:', values.name);
       console.log('Sectors:', values.sectors);
       console.log('Agreed to terms:', values.agreeToTerms);
@@ -108,6 +99,7 @@ function MainForm() {
 
 
       const data = {
+        id: countId,
         name: values.name,
         sectors: values.sectors,
         agreeToTerms: values.agreeToTerms, 
@@ -251,8 +243,16 @@ function MainForm() {
             Clear Database
         </button>
       </form>
+
+      <EditableTable countId={countId} 
+      CountClearSector={CountClearSector}
+      />
+    
     </div>
   );
 }
 
 export default MainForm;
+
+
+
